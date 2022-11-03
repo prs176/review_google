@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
-import { RootContainer } from "./styled/AuthContainer";
+import * as Style from "./styled/AuthContainer";
 
 interface Props {
   children: ReactNode;
 }
 
 const AuthContainer = ({ children }: Props): JSX.Element => {
-  return <RootContainer>{children}</RootContainer>;
+  return <Style.RootContainer>{children}</Style.RootContainer>;
 };
 
 export default AuthContainer;

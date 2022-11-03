@@ -9,6 +9,11 @@ export const RootContainer = styled.div`
   align-items: center;
 `;
 
+export const ToolContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const SearchInput = styled.input`
   border: none;
   background: #efefef;
@@ -18,6 +23,26 @@ export const SearchInput = styled.input`
   padding-right: 15px;
   border-radius: 20px;
   margin: 10px;
+  outline: none;
+`;
+
+export const LogoutButton = styled.button`
+  border: none;
+  font-size: 1.1em;
+  color: #a5a5a5;
+  background: none;
+  border: none;
+  margin: 10px;
+  cursor: pointer;
+`;
+
+export const Profile = styled.div`
+  background: #ffc000;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-left: 10px;
+  cursor: pointer;
 `;
 
 export const Divider = styled.hr`

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
-  border: none;
   background: #efefef;
   height: 45px;
   padding-left: 15px;

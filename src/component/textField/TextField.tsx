@@ -1,4 +1,4 @@
-import { Input, Label } from "./styled/TextField";
+import * as Style from "./styled/TextField";
 
 interface Props {
   label: string;
@@ -9,8 +9,8 @@ interface Props {
 const TextField = ({ label, placeholder, children }: Props): JSX.Element => {
   return (
     <>
-      <Label>{label}</Label>
-      <Input placeholder={placeholder}>{children}</Input>
+      <Style.Label>{label}</Style.Label>
+      <Style.Input placeholder={placeholder}>{children}</Style.Input>
     </>
   );
 };

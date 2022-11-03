@@ -3,6 +3,17 @@ html {
   height: 100%;
 }
 
+input {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  outline: none;
+}
+
+input::placeholder {
+  color: #a5a5a5;
+}
+
 body {
   margin: 0;
   height: 100%;
