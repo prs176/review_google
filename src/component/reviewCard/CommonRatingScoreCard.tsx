@@ -18,7 +18,11 @@ const CommonRatingScoreCard = ({ rating, scores }: Props): JSX.Element => {
         <Rating
           disabled
           value={rating}
-          icon={<StarIcon color="disabled" fontSize="large" />}
+          icon={
+            <Style.DisabledIconWrapper>
+              <StarIcon fontSize="large" />
+            </Style.DisabledIconWrapper>
+          }
           emptyIcon={<StarBorderIcon fontSize="large" />}
         ></Rating>
         <Style.RatingGuideText>{rating}점</Style.RatingGuideText>

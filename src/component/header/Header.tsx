@@ -2,10 +2,11 @@ import Logo from "../logo/Logo";
 import * as Style from "./styled/Header";
 
 interface Props {
+  isLoggedIn: boolean;
   type: "common" | "logout";
 }
 
-const Header = ({ type }: Props): JSX.Element => {
+const Header = ({ isLoggedIn, type }: Props): JSX.Element => {
   return (
     <div>
       <Style.RootContainer>
@@ -16,7 +17,7 @@ const Header = ({ type }: Props): JSX.Element => {
           ) : (
             <Style.LogoutButton>로그아웃</Style.LogoutButton>
           )}
-          <Style.Profile />
+          {isLoggedIn ? <Style.LoggedInProfile /> : <Style.LoggedOutProfile />}
         </Style.ToolContainer>
       </Style.RootContainer>
       <Style.Divider></Style.Divider>

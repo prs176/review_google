@@ -63,7 +63,11 @@ const EditRatingScoreCard = ({ raiting, scores }: Props): JSX.Element => {
         <Rating
           value={rating}
           onChange={onChangeRating}
-          icon={<StarIcon color="disabled" fontSize="large" />}
+          icon={
+            <Style.IconWrapper>
+              <StarIcon fontSize="large" />
+            </Style.IconWrapper>
+          }
           emptyIcon={<StarBorderIcon fontSize="large" />}
         ></Rating>
         <Style.RatingGuideText>{rating}점</Style.RatingGuideText>

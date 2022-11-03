@@ -19,10 +19,11 @@ const Search = (): JSX.Element => {
       count: 100,
     },
   ]);
+  const [isLoggedIn, setIsLoggedInt] = useState<boolean>(true);
 
   return (
     <>
-      <Header type="common"></Header>
+      <Header isLoggedIn={isLoggedIn} type="common"></Header>
       <Style.ToolContainer>
         <IconButton
           onClick={() => {

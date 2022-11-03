@@ -46,10 +46,11 @@ const My = (): JSX.Element => {
   ]);
   const [editedReviewIdx, setEditedReviewIdx] = useState<number>(-1);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedInt] = useState<boolean>(true);
 
   return (
     <>
-      <Header type="logout" />
+      <Header isLoggedIn={isLoggedIn} type="logout" />
       <Style.UserInfoContainer>
         <UserCard user={user} />
         <Style.GuideTextWrapper>

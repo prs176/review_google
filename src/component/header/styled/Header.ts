@@ -36,7 +36,7 @@ export const LogoutButton = styled.button`
   cursor: pointer;
 `;
 
-export const Profile = styled.div`
+export const LoggedInProfile = styled.div`
   background: #ffc000;
   border-radius: 50%;
   width: 36px;
@@ -45,8 +45,17 @@ export const Profile = styled.div`
   cursor: pointer;
 `;
 
+export const LoggedOutProfile = styled.div`
+  background: #d9d9d9;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-left: 10px;
+  cursor: pointer;
+`;
+
 export const Divider = styled.hr`
-  border: 1px solid lightgray;
+  border: 0.5px solid lightgray;
   margin: 0px;
   margin-left: 20px;
   margin-right: 20px;

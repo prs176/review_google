@@ -7,6 +7,16 @@ export const RatingScoreContainer = styled.div`
   justify-content: space-between;
 `;
 
+export const DisabledIconWrapper = styled.div`
+  display: flex;
+  color: #5b5b5b;
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  color: #bfbfbf;
+`;
+
 export const RatingName = styled.p`
   width: 40px;
   font-size: 0.9em;
