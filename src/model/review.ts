@@ -1,16 +1,32 @@
+import { Score } from "./score";
+import { Subject } from "./subject";
+import { SimpleUser } from "./user";
+
 export interface Review {
-  idx: number;
-  subjectIdx: number;
+  id: number;
   title: string;
-  userId: string;
   content: string;
   raiting: number;
   scores: Score[];
+  user: SimpleUser;
+  good: number;
+  bad: number;
+  isMine: boolean;
+  isGood: boolean;
+  isBad: boolean;
 }
 
-export interface Score {
-  idx: number;
-  reviewIdx: number;
-  name: string;
-  score: number;
+export interface ReviewIncludeSubject {
+  id: number;
+  title: string;
+  content: string;
+  raiting: number;
+  scores: Score[];
+  user: SimpleUser;
+  subject: Subject;
+  good: number;
+  bad: number;
+  isMine: boolean;
+  isGood: boolean;
+  isBad: boolean;
 }

@@ -2,7 +2,7 @@ import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import * as Style from "./styled/RatingScoreCard";
-import { Score } from "../../model/review";
+import { Score } from "../../model/score";
 import CustomLinearProgress from "./styled/CustomLinearProgress";
 
 interface Props {
@@ -28,8 +28,8 @@ const CommonRatingScoreCard = ({ rating, scores }: Props): JSX.Element => {
         <Style.RatingGuideText>{rating}점</Style.RatingGuideText>
       </Style.RatingScoreContainer>
 
-      {scores.map((score) => (
-        <Style.RatingScoreContainer key={score.idx}>
+      {scores.map((score, id) => (
+        <Style.RatingScoreContainer key={id}>
           <Style.RatingName>{score.name}</Style.RatingName>
           <CustomLinearProgress variant="determinate" value={score.score} />
           <Style.ScoreContainer>

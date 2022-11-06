@@ -4,7 +4,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import * as Style from "./styled/RatingScoreCard";
 import { useState } from "react";
 import CustomLinearProgress from "./styled/CustomLinearProgress";
-import { Score } from "../../model/review";
+import { Score } from "../../model/score";
 
 interface Props {
   raiting: number;

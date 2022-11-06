@@ -1,22 +1,34 @@
+import { useNavigate } from "react-router-dom";
 import * as Style from "./styled/Header";
 
 interface Props {
-  userId: string;
-  isLoggedIn: boolean;
+  email?: string;
 }
 
-const Profile = ({ userId, isLoggedIn }: Props): JSX.Element => {
+const Profile = ({ email }: Props): JSX.Element => {
+  const navigate = useNavigate();
+
   return (
     <Style.RootContainer>
       <Style.ToolContainer>
-        {isLoggedIn ? (
+        {email ? (
           <>
-            <p>{userId}</p>
-            <Style.LoggedInProfile />
+            <p>{email}</p>
+            <Style.LoggedInProfile
+              onClick={() => {
+                navigate("/my");
+              }}
+            />
           </>
         ) : (
           <>
-            <Style.LogoutButton>로그인</Style.LogoutButton>
+            <Style.LogoutButton
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              로그인
+            </Style.LogoutButton>
             <Style.LoggedOutProfile />
           </>
         )}

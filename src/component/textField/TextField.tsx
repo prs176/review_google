@@ -1,16 +1,19 @@
+import React from "react";
 import * as Style from "./styled/TextField";
 
 interface Props {
+  type?: string;
   label: string;
   placeholder: string;
-  children?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TextField = ({ label, placeholder, children }: Props): JSX.Element => {
+const TextField = ({ type, label, placeholder, value, onChange }: Props): JSX.Element => {
   return (
     <>
       <Style.Label>{label}</Style.Label>
-      <Style.Input placeholder={placeholder}>{children}</Style.Input>
+      <Style.Input type={type} placeholder={placeholder} value={value} onChange={onChange} />
     </>
   );
 };

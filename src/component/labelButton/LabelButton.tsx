@@ -2,10 +2,11 @@ import * as Style from "./styled/LabelButton";
 
 interface Props {
   children?: string;
+  onClick: () => void;
 }
 
-const LabelButton = ({ children }: Props): JSX.Element => {
-  return <Style.Button>{children}</Style.Button>;
+const LabelButton = ({ children, onClick }: Props): JSX.Element => {
+  return <Style.Button onClick={onClick}>{children}</Style.Button>;
 };
 
 export default LabelButton;

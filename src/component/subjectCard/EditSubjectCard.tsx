@@ -3,9 +3,10 @@ import * as Style from "./styled/EditSubjectCard";
 import { CategoryBar, Image } from "./styled/SubjectCard";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { useState } from "react";
+import { ErrorText } from "../../styled/Common";
 
 interface Props {
-  onAdd: () => void;
+  onAdd: (file: File, category: CategoryToNumber, title: string, from: string) => void;
 }
 
 const EditSubjectCard = ({ onAdd }: Props): JSX.Element => {
@@ -14,7 +15,7 @@ const EditSubjectCard = ({ onAdd }: Props): JSX.Element => {
     .filter((cateogory) => !isNaN(cateogory));
 
   const [image, setImage] = useState<string>("");
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File>();
   const [category, setCategory] = useState<CategoryToNumber>(CategoryToNumber.FOOD);
   const [title, setTitle] = useState<string>("");
   const [from, setFrom] = useState<string>("");
@@ -34,6 +35,8 @@ const EditSubjectCard = ({ onAdd }: Props): JSX.Element => {
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
   const onChangeFrom = (e: React.ChangeEvent<HTMLInputElement>) => setFrom(e.target.value);
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   return (
     <Style.RootContainer>
       <label htmlFor="file">
@@ -50,14 +53,14 @@ const EditSubjectCard = ({ onAdd }: Props): JSX.Element => {
       <Style.ImageInput
         id="file"
         type="file"
-        accept="image/jpg, image/png, image/jpeg"
+        accept="image/jpg, image/png, image/jpeg, image/webp"
         onChange={onChangeFile}
       />
       <Style.CategoryContainer>
         <CategoryBar category={category} />
         <Style.CategorySelect onChange={onChangeCategory} value={category}>
           {categories.map((category) => (
-            <option value={category}>
+            <option key={category} value={category}>
               {Category[CategoryToNumber[category] as keyof typeof Category]}
             </option>
           ))}
@@ -71,7 +74,18 @@ const EditSubjectCard = ({ onAdd }: Props): JSX.Element => {
         value={from}
       />
       <Style.ToolWrapper>
-        <Style.DoneButton onClick={onAdd}>완료</Style.DoneButton>
+        <ErrorText display={errorMessage ? "visible" : "hidden"}>{errorMessage}</ErrorText>
+        <Style.DoneButton
+          onClick={() => {
+            if (file && category && title && from) {
+              onAdd(file!, category, title, from);
+            } else {
+              setErrorMessage("값이 비어있습니다.");
+            }
+          }}
+        >
+          완료
+        </Style.DoneButton>
       </Style.ToolWrapper>
     </Style.RootContainer>
   );

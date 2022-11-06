@@ -1,10 +1,20 @@
+import { Keyword } from "./keyword";
+import { Score } from "./score";
+
 export interface Subject {
-  idx: number;
+  id: number;
   image: string;
   category: CategoryToNumber;
   title: string;
   from: string;
   count: number;
+}
+
+export interface DetailSubject {
+  subject: Subject;
+  raiting: number;
+  scores: Score[];
+  keywords: Keyword[];
 }
 
 export enum Category {

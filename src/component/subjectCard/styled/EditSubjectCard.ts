@@ -53,6 +53,7 @@ export const FromInput = styled.input`
 
 export const ToolWrapper = styled.div`
   display: flex;
+  align-items: center;
   justify-content: right;
 `;
 

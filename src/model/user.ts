@@ -1,6 +1,11 @@
 export interface User {
-  idx: number;
+  id: number;
   name: string;
+  email: string;
   birth: string;
-  id: string;
+}
+
+export interface SimpleUser {
+  id: number;
+  email: string;
 }

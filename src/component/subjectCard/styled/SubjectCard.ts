@@ -44,11 +44,9 @@ export const Title = styled.h2`
 `;
 
 export const From = styled.p`
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
+  white-space: nowrap;
   margin: 0px;
 `;
 
