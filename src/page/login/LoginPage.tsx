@@ -1,3 +1,5 @@
+import { IconButton } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,8 +24,8 @@ const LoginPage = (): JSX.Element => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const onLogin = async () => {
-    if (email === "" || password === "") {
-      setErrorMessage("아이디와 비밀번호를 입력해주세요.");
+    if (!(email && password)) {
+      setErrorMessage("값이 비어있습니다.");
       return;
     }
     try {
@@ -44,6 +46,19 @@ const LoginPage = (): JSX.Element => {
   return (
     <Style.RootContainer>
       <AuthContainer>
+        <Style.ToolContainer>
+          <IconButton
+            onClick={() => {
+              if (window.history.state) {
+                navigate(-1);
+              } else {
+                navigate("/");
+              }
+            }}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+        </Style.ToolContainer>
         <Style.LogoWrapper>
           <Logo type="big" />
         </Style.LogoWrapper>

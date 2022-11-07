@@ -4,14 +4,22 @@ import * as Style from "./styled/SubjectCard";
 import SubjectInfoCard from "./SubjectInfoCard";
 
 interface Props {
+  cursor: "pointer" | "auto";
   subject: Subject;
 }
 
-const SubjectCard = ({ subject }: Props): JSX.Element => {
+const SubjectCard = ({ cursor, subject }: Props): JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <Style.RootContainer onClick={() => navigate(`/detail_subject/${subject.id}`)}>
+    <Style.RootContainer
+      cursor={cursor}
+      onClick={() => {
+        if (cursor === "pointer") {
+          navigate(`/detail_subject/${subject.id}`);
+        }
+      }}
+    >
       <Style.Image src={subject.image} />
       <SubjectInfoCard subject={subject} />
     </Style.RootContainer>

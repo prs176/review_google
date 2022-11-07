@@ -7,6 +7,11 @@ export const RootContainer = styled.div`
   height: 100%;
 `;
 
+export const ToolContainer = styled.div`
+  margin: -20px;
+  margin-bottom: -30px;
+`;
+
 export const LogoWrapper = styled.div`
   margin: 0px auto;
 `;

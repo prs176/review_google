@@ -1,61 +1,42 @@
-import { IconButton } from "@mui/material";
 import { Review, ReviewIncludeSubject } from "../../model/review";
 import * as Style from "./styled/ReviewCard";
-import DeletIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import { useState } from "react";
-import CommonRatingScoreCard from "./CommonRatingScoreCard";
+import RatingScoreCard from "./RatingScoreCard";
+import Toolbar from "./Toolbar";
+import ReviewInfoCard from "./ReviewInfoCard";
 
 interface Props {
   review: Review | ReviewIncludeSubject;
   onEdit: () => void;
+  onDelete: (reviewId: number) => void;
+  onGood: (reviewId: number) => void;
+  onNotGood: (reviewId: number) => void;
+  onBad: (reviewId: number) => void;
+  onNotBad: (reviewId: number) => void;
 }
 
-const CommonReviewCard = ({ review, onEdit }: Props): JSX.Element => {
-  const [isExtended, setIsExtended] = useState<boolean>(false);
-
+const CommonReviewCard = ({
+  review,
+  onEdit,
+  onDelete,
+  onGood,
+  onNotGood,
+  onBad,
+  onNotBad,
+}: Props): JSX.Element => {
   return (
     <Style.RootContainer>
-      <Style.ContentContainer>
-        <Style.ReviewContainer>
-          <Style.UserInfoContainer>
-            <Style.Title>{review.title}</Style.Title>
-            <Style.Id>{review.user.email}</Style.Id>
-          </Style.UserInfoContainer>
-          {isExtended ? <p>{review.content}</p> : <Style.Content>{review.content}</Style.Content>}
-          <Style.ExtendButtonWrapper>
-            {isExtended ? (
-              <Style.ExtendButton onClick={() => setIsExtended(false)}>접기</Style.ExtendButton>
-            ) : (
-              <Style.ExtendButton onClick={() => setIsExtended(true)}>더보기</Style.ExtendButton>
-            )}
-          </Style.ExtendButtonWrapper>
-        </Style.ReviewContainer>
-        <Style.Divider />
-        <Style.ScoreContainer>
-          <CommonRatingScoreCard rating={review.raiting} scores={review.scores} />
-        </Style.ScoreContainer>
-      </Style.ContentContainer>
-      <Style.ToolContainer>
-        <div>
-          <IconButton onClick={onEdit}>
-            <EditIcon />
-          </IconButton>
-          <IconButton>
-            <DeletIcon />
-          </IconButton>
-        </div>
-        <div>
-          <IconButton>
-            <ThumbUpAltIcon />
-          </IconButton>
-          <IconButton>
-            <ThumbDownAltIcon />
-          </IconButton>
-        </div>
-      </Style.ToolContainer>
+      <ReviewInfoCard type="with" review={review} />
+      <Toolbar
+        type="common"
+        review={review}
+        onEdit={onEdit}
+        onDelete={() => onDelete(review.id)}
+        onGood={() => onGood(review.id)}
+        onNotGood={() => onNotGood(review.id)}
+        onBad={() => onBad(review.id)}
+        onNotBad={() => onNotBad(review.id)}
+      />
     </Style.RootContainer>
   );
 };

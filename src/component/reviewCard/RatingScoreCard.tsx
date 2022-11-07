@@ -10,14 +10,15 @@ interface Props {
   scores: Score[];
 }
 
-const CommonRatingScoreCard = ({ rating, scores }: Props): JSX.Element => {
+const RatingScoreCard = ({ rating, scores }: Props): JSX.Element => {
   return (
-    <>
-      <Style.RatingScoreContainer>
+    <Style.RootContainer>
+      <Style.RaitingContainer>
         <Style.RatingName>평점</Style.RatingName>
         <Rating
           disabled
-          value={rating}
+          precision={0.1}
+          value={Math.round(rating * 2) / 2}
           icon={
             <Style.DisabledIconWrapper>
               <StarIcon fontSize="large" />
@@ -25,20 +26,20 @@ const CommonRatingScoreCard = ({ rating, scores }: Props): JSX.Element => {
           }
           emptyIcon={<StarBorderIcon fontSize="large" />}
         ></Rating>
-        <Style.RatingGuideText>{rating}점</Style.RatingGuideText>
-      </Style.RatingScoreContainer>
+        <Style.RatingGuideText>{Math.round(rating * 10) / 10}점</Style.RatingGuideText>
+      </Style.RaitingContainer>
 
       {scores.map((score, id) => (
-        <Style.RatingScoreContainer key={id}>
-          <Style.RatingName>{score.name}</Style.RatingName>
+        <Style.ScoreContainer key={id}>
+          <Style.RatingName title={score.name}>{score.name}</Style.RatingName>
           <CustomLinearProgress variant="determinate" value={score.score} />
-          <Style.ScoreContainer>
-            <Style.ScoreGuideText>{score.score}%</Style.ScoreGuideText>
-          </Style.ScoreContainer>
-        </Style.RatingScoreContainer>
+          <Style.ScoreWrapper>
+            <Style.ScoreGuideText>{Math.round(score.score * 10) / 10}%</Style.ScoreGuideText>
+          </Style.ScoreWrapper>
+        </Style.ScoreContainer>
       ))}
-    </>
+    </Style.RootContainer>
   );
 };
 
-export default CommonRatingScoreCard;
+export default RatingScoreCard;

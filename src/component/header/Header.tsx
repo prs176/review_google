@@ -20,7 +20,7 @@ const Header = ({ isLoggedIn, type, value }: Props): JSX.Element => {
   return (
     <div>
       <Style.RootContainer>
-        <Logo type="small"></Logo>
+        <Logo type="small" onClick={() => navigate("/")}></Logo>
         <Style.ToolContainer>
           {type === "common" ? (
             <Style.SearchInput
@@ -28,8 +28,9 @@ const Header = ({ isLoggedIn, type, value }: Props): JSX.Element => {
               value={keyword}
               onChange={onChangeKeyword}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  navigate(`/search_subject/${keyword}`);
+                if (e.key === "Enter" && keyword !== value) {
+                  const url = encodeURIComponent(`${keyword}`);
+                  navigate(`/search_subject/${url}`);
                 }
               }}
             ></Style.SearchInput>
@@ -47,7 +48,19 @@ const Header = ({ isLoggedIn, type, value }: Props): JSX.Element => {
               로그아웃
             </Style.LogoutButton>
           )}
-          {isLoggedIn ? <Style.LoggedInProfile /> : <Style.LoggedOutProfile />}
+          {isLoggedIn ? (
+            <Style.LoggedInProfile
+              onClick={() => {
+                navigate("/my");
+              }}
+            />
+          ) : (
+            <Style.LoggedOutProfile
+              onClick={() => {
+                navigate("/login");
+              }}
+            />
+          )}
         </Style.ToolContainer>
       </Style.RootContainer>
       <Style.Divider></Style.Divider>

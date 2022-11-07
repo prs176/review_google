@@ -29,7 +29,7 @@ const SearchSubjectPage = (): JSX.Element => {
         setUser(user);
       }
 
-      const subjects = await getSubjects(keyword || "");
+      const subjects = await getSubjects(encodeURIComponent(keyword || ""));
       setSubjects(subjects);
     } catch (err) {}
   }, [keyword]);
@@ -42,7 +42,8 @@ const SearchSubjectPage = (): JSX.Element => {
       setSubjects(subjects);
 
       keyword = title;
-      navigate(`/search_subject/${title}`);
+      const url = encodeURIComponent(title);
+      navigate(`/search_subject/${url}`);
     } catch (err) {
       const axiosError = err as AxiosError;
       if (axiosError.response) {
@@ -62,7 +63,7 @@ const SearchSubjectPage = (): JSX.Element => {
         <IconButton
           onClick={() => {
             if (!getToken()) {
-              navigate("/login");
+              alert("로그인이 필요한 서비스입니다.");
               return;
             }
             if (isEdit) {
@@ -84,7 +85,7 @@ const SearchSubjectPage = (): JSX.Element => {
           />
         )}
         {subjects.map((subject) => (
-          <SubjectCard key={subject.id} subject={subject} />
+          <SubjectCard cursor="pointer" key={subject.id} subject={subject} />
         ))}
         {!subjects.length && !isEdit && (
           <Style.PlaceHolder>

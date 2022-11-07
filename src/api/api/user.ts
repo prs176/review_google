@@ -17,13 +17,6 @@ export const postRegister = async (request: RegisterRequest): Promise<void> => {
 };
 
 export const getMyUser = async (): Promise<User> => {
-  let config = {};
-  const token = getToken();
-  if (token) {
-    config = {
-      headers: { Authorization: token },
-    };
-  }
-  const { data } = await instance.get<Response<User>>(`/user`, config);
+  const { data } = await instance.get<Response<User>>(`/user`);
   return data.response;
 };

@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getMyReviews } from "../../api/api/review";
+import { getMyUser } from "../../api/api/user";
+import { getToken } from "../../api/token/token";
 import Header from "../../component/header/Header";
 import ReviewCard from "../../component/reviewCard/ReviewCard";
+import ReviewInfoCard from "../../component/reviewCard/ReviewInfoCard";
 import SubjectShortcut from "../../component/subjectCard/SubjectShortcut";
 import UserCard from "../../component/userCard/UserCard";
 import { ReviewIncludeSubject } from "../../model/review";
@@ -15,42 +19,27 @@ const MyPage = (): JSX.Element => {
     birth: "2013년 9월 10일",
     email: "romicat77@gmail.com",
   });
-  const [reviews, setReviews] = useState<ReviewIncludeSubject[]>([
-    {
-      id: 0,
-      subject: {
-        id: 0,
-        image: "http://img.cgv.co.kr/Movie/Thumbnail/Poster/000086/86217/86217_1000.jpg",
-        category: CategoryToNumber.MOVIE,
-        title: "아바타 리마스터링",
-        from: "제임스 카메론",
-        count: 100,
-      },
-      user: { id: 1, email: "romicat77@gmail.com" },
-      title: "옷장에서 잠자느라 못봄",
-      content:
-        "This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77. This is a review from romicat77.",
-      raiting: 4,
-      scores: [
-        {
-          name: "작품성",
-          score: 5,
-        },
-      ],
-      good: 0,
-      bad: 0,
-      isMine: false,
-      isGood: false,
-      isBad: false,
-    },
-  ]);
-  const [editedReviewId, setEditedReviewId] = useState<number>(0);
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedInt] = useState<boolean>(true);
+  const [reviews, setReviews] = useState<ReviewIncludeSubject[]>([]);
+
+  const setup = async () => {
+    try {
+      if (getToken()) {
+        const user = await getMyUser();
+        setUser(user);
+      }
+
+      const reviews = await getMyReviews();
+      setReviews(reviews);
+    } catch (err) {}
+  };
+
+  useEffect(() => {
+    setup();
+  }, []);
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} type="logout" />
+      <Header isLoggedIn={true} type="logout" />
       <Style.UserInfoContainer>
         <UserCard user={user} />
         <Style.GuideTextWrapper>
@@ -61,20 +50,12 @@ const MyPage = (): JSX.Element => {
         {reviews.map((review) => {
           return (
             <Style.SubjectReviewContainer>
-              <SubjectShortcut subject={review.subject} />
-              <ReviewCard
-                key={review.id}
-                type={review.id === editedReviewId ? "edit" : "common"}
-                review={review}
-                onEdit={() => {
-                  setEditedReviewId(review.id);
-                  setIsEdit(true);
-                }}
-                onDone={() => {
-                  setEditedReviewId(0);
-                  setIsEdit(false);
-                }}
-              />
+              <Style.ShortCutWrapper>
+                <SubjectShortcut subject={review.subject} />
+              </Style.ShortCutWrapper>
+              <Style.ReviewWrapper>
+                <ReviewInfoCard type="single" review={review} />
+              </Style.ReviewWrapper>
             </Style.SubjectReviewContainer>
           );
         })}

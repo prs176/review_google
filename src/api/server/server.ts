@@ -6,9 +6,15 @@ const apiURL = "https://api.matgim.ai/api-keyword";
 const instance = axios.create({
   baseURL,
   headers: {
-    Authorization: getToken(),
     "Access-Control-Allow-Origin": "*",
   },
+});
+
+instance.interceptors.request.use((config) => {
+  const token = getToken();
+  config.headers!.Authorization = token;
+
+  return config;
 });
 
 instance.interceptors.response.use(

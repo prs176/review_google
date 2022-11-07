@@ -1,4 +1,4 @@
-import { Review } from "../../model/review";
+import { Review, ReviewIncludeSubject } from "../../model/review";
 import { ReviewRequest } from "../request/review";
 import { MessageResponse, Response } from "../response/response";
 import instance from "../server/server";
@@ -11,8 +11,8 @@ export const getReviews = async (
   return data.response;
 };
 
-export const getMyReviews = async (): Promise<Review[]> => {
-  const { data } = await instance.get<Response<Review[]>>(`/review/my`);
+export const getMyReviews = async (): Promise<ReviewIncludeSubject[]> => {
+  const { data } = await instance.get<Response<ReviewIncludeSubject[]>>(`/review/my`);
   return data.response;
 };
 
@@ -47,6 +47,6 @@ export const putReview = async (id: number, request: ReviewRequest): Promise<voi
 };
 
 export const deleteReview = async (id: number): Promise<void> => {
-  await instance.delete<MessageResponse>(`/user/${id}`);
+  await instance.delete<MessageResponse>(`/review/${id}`);
   return;
 };

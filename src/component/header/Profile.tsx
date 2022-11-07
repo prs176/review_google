@@ -29,7 +29,11 @@ const Profile = ({ email }: Props): JSX.Element => {
             >
               로그인
             </Style.LogoutButton>
-            <Style.LoggedOutProfile />
+            <Style.LoggedOutProfile
+              onClick={() => {
+                navigate("/login");
+              }}
+            />
           </>
         )}
       </Style.ToolContainer>

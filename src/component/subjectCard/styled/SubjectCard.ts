@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import { CategoryToColor, CategoryToNumber } from "../../../model/subject";
 
-export const RootContainer = styled.div`
+export const RootContainer = styled.div<{ cursor: "pointer" | "auto" }>`
   margin: 20px;
   margin-top: 30px;
   width: 235px;
-  cursor: pointer;
+  cursor: ${(props) => props.cursor};
+`;
+
+export const SubjectInfoCardRootContainer = styled.div`
+  margin: 20px;
+  margin-top: 30px;
+  width: 235px;
 `;
 
 export const Image = styled.img`

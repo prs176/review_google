@@ -7,17 +7,16 @@ export const RootContainer = styled.div`
 `;
 
 export const BodyContainer = styled.div`
-  flex-grow: 1;
   display: flex;
   overflow: hidden;
 `;
 
 export const SubjectContainer = styled.div`
-  width: 20%;
+  width: 25%;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
   padding-bottom: 30px;
 `;
 
@@ -26,25 +25,33 @@ export const SubjectWrapper = styled.div`
   justify-content: center;
 `;
 
-export const ScoreWrapper = styled.div`
-  margin-left: 10px;
-  margin-bottom: 50px;
+export const SubjectInfoContainer = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
 `;
 
-export const SubjectInfoWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+export const CommonRatingScoreCardWrapper = styled.div`
+  margin-left: -8px;
+`;
+
+export const ContentContainer = styled.div`
+  width: 100%;
+  display: block;
 `;
 
 export const ReviewContainer = styled.div`
-  width: 80%;
-  overflow-x: hidden;
+  width: 100%;
+  height: 88%;
+  padding-top: 20px;
+  padding-bottom: 20px;
   overflow-y: scroll;
   display: block;
   background: #efeff4;
 `;
 
 export const SubjectToolContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
@@ -54,14 +61,23 @@ export const Subtitle = styled.p`
   margin: 0px;
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 10px;
 `;
 
 export const KeywordContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+`;
+
+export const KeywordWrapper = styled.div`
+  display: flex;
   align-items: center;
-  margin-top: 5px;
   justify-content: center;
+  margin-top: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 5px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
 `;
 
 export const Count = styled.p`
@@ -76,7 +92,6 @@ export const ToolContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 55px;
-  margin-bottom: 30px;
   padding-left: 20px;
   padding-right: 20px;
 `;

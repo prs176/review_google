@@ -24,4 +24,14 @@ export const ReviewContainer = styled.div`
 export const SubjectReviewContainer = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+export const ShortCutWrapper = styled.div`
+  flex: 25;
+`;
+
+export const ReviewWrapper = styled.div`
+  flex: 75;
 `;

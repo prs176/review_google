@@ -42,7 +42,8 @@ const MainPage = (): JSX.Element => {
           onChange={onChangeKeyword}
           onKeyDown={(e) => {
             if (e.key === "Enter" && keyword) {
-              navigate(`/search_subject/${keyword}`);
+              const url = encodeURIComponent(`${keyword}`);
+              navigate(`/search_subject/${url}`);
             }
           }}
         ></Style.SearchBar>

@@ -27,8 +27,8 @@ const RegisterPage = (): JSX.Element => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const onRegister = async () => {
-    if (email === "" || password === "") {
-      setErrorMessage("아이디와 비밀번호를 입력해주세요.");
+    if (!(email && password && name && birth.length === 10)) {
+      setErrorMessage("값이 비어 있습니다.");
       return;
     }
     try {

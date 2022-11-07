@@ -12,7 +12,7 @@ const UserCard = ({ user }: Props): JSX.Element => {
         <Style.Name>{user.name}</Style.Name>
         <Style.Birth>{user.birth}</Style.Birth>
       </Style.UserInfoContainer>
-      {user.id}
+      {user.email}
     </>
   );
 };

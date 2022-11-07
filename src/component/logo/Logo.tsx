@@ -3,11 +3,12 @@ import logo from "../../asset/logo.png";
 
 interface Props {
   type: "small" | "big";
+  onClick?: () => void;
 }
 
-const Logo = ({ type }: Props): JSX.Element => {
+const Logo = ({ type, onClick }: Props): JSX.Element => {
   return (
-    <Style.RootContainer>
+    <Style.RootContainer type={type} onClick={onClick}>
       <Style.Image alt="" src={logo} type={type}></Style.Image>
     </Style.RootContainer>
   );

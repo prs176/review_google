@@ -1,5 +1,6 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { Subject } from "../../model/subject";
 import * as Style from "./styled/SubjectShortcut";
 import SubjectInfoCard from "./SubjectInfoCard";
@@ -9,10 +10,16 @@ interface Props {
 }
 
 const SubjectShortcut = ({ subject }: Props): JSX.Element => {
+  const navigate = useNavigate();
+
   return (
     <Style.RootContainer>
       <div>
-        <IconButton>
+        <IconButton
+          onClick={() => {
+            navigate(`/detail_subject/${subject.id}`);
+          }}
+        >
           <ArrowBackIcon />
         </IconButton>
       </div>
