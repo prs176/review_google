@@ -8,7 +8,7 @@ import CustomTextareaAutosize from "./styled/CustomTextareaAutosize";
 import CustomLinearProgress from "./styled/CustomLinearProgress";
 import { Rating } from "@mui/material";
 import { Score } from "../../model/score";
-import Toolbar from "./Toolbar";
+import { ErrorText } from "../../styled/Common";
 
 interface Props {
   review: Review;
@@ -151,27 +151,33 @@ const EditReviewCard = ({ review, onDone }: Props): JSX.Element => {
           </Style2.RootContainer>
         </Style.ScoreContainer>
       </Style.ContentContainer>
-      <Toolbar
-        type="edit"
-        errorMessage={errorMessage}
-        onDone={() => {
-          if (title && content && raiting) {
-            const scores = [];
-            if (scoreName1) {
-              scores.push({ name: scoreName1, score: score1 });
-            }
-            if (scoreName2) {
-              scores.push({ name: scoreName2, score: score2 });
-            }
-            if (scoreName3) {
-              scores.push({ name: scoreName3, score: score3 });
-            }
-            onDone(review.id, title, content, raiting, scores);
-          } else {
-            setErrorMessage("값이 비어있습니다");
-          }
-        }}
-      ></Toolbar>
+      <Style.ToolContainer>
+        <div></div>
+        <Style.ButtonErrorMessageContainer>
+          <ErrorText display={errorMessage ? "visible" : "hidden"}>{errorMessage}</ErrorText>
+          <Style.DoneButton
+            onClick={() => {
+              if (title && content && raiting) {
+                const scores = [];
+                if (scoreName1) {
+                  scores.push({ name: scoreName1, score: score1 });
+                }
+                if (scoreName2) {
+                  scores.push({ name: scoreName2, score: score2 });
+                }
+                if (scoreName3) {
+                  scores.push({ name: scoreName3, score: score3 });
+                }
+                onDone(review.id, title, content, raiting, scores);
+              } else {
+                setErrorMessage("값이 비어있습니다");
+              }
+            }}
+          >
+            완료
+          </Style.DoneButton>
+        </Style.ButtonErrorMessageContainer>
+      </Style.ToolContainer>
     </Style.RootContainer>
   );
 };

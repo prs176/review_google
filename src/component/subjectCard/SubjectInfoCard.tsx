@@ -7,7 +7,7 @@ interface Props {
 
 const SubjectInfoCard = ({ subject }: Props): JSX.Element => {
   return (
-    <Style.SubjectInfoCardRootContainer>
+    <>
       <Style.CategoryContainer>
         <Style.CategoryBar category={subject.category} />
         <Style.CategoryText>
@@ -19,7 +19,7 @@ const SubjectInfoCard = ({ subject }: Props): JSX.Element => {
       <Style.CountWrapper>
         <Style.Count>리뷰 수 {subject.count}</Style.Count>
       </Style.CountWrapper>
-    </Style.SubjectInfoCardRootContainer>
+    </>
   );
 };
 export default SubjectInfoCard;

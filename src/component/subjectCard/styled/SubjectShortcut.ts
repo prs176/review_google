@@ -7,3 +7,9 @@ export const RootContainer = styled.div`
     margin-right: 10px;
   }
 `;
+
+export const SubjectInfoCardRootContainer = styled.div`
+  margin: 20px;
+  margin-top: 30px;
+  width: 235px;
+`;

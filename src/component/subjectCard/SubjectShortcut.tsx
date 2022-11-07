@@ -23,9 +23,9 @@ const SubjectShortcut = ({ subject }: Props): JSX.Element => {
           <ArrowBackIcon />
         </IconButton>
       </div>
-      <div>
+      <Style.SubjectInfoCardRootContainer>
         <SubjectInfoCard subject={subject} />
-      </div>
+      </Style.SubjectInfoCardRootContainer>
     </Style.RootContainer>
   );
 };

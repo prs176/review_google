@@ -8,12 +8,6 @@ export const RootContainer = styled.div<{ cursor: "pointer" | "auto" }>`
   cursor: ${(props) => props.cursor};
 `;
 
-export const SubjectInfoCardRootContainer = styled.div`
-  margin: 20px;
-  margin-top: 30px;
-  width: 235px;
-`;
-
 export const Image = styled.img`
   width: 235px;
   height: 250px;
