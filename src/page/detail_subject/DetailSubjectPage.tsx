@@ -1,6 +1,7 @@
-import { IconButton } from "@mui/material";
+import { IconButton, Modal } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import FlagIcon from "@mui/icons-material/Flag";
 import Header from "../../component/header/Header";
 import ReviewCard from "../../component/reviewCard/ReviewCard";
 import { Review } from "../../model/review";
@@ -12,7 +13,7 @@ import RatingScoreCard from "../../component/reviewCard/RatingScoreCard";
 import EditReviewCard from "../../component/reviewCard/EditReviewCard";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getToken } from "../../api/token/token";
 import { getMyUser } from "../../api/api/user";
 import { getDetailSubject } from "../../api/api/subject";
@@ -30,8 +31,10 @@ import { AxiosError } from "axios";
 import { MessageResponse } from "../../api/response/response";
 import { Score } from "../../model/score";
 import { postExtractKeyword } from "../../api/api/keyword";
+import ReportModal from "../../component/modal/ReportModal";
 
 const DetailSubjectPage = (): JSX.Element => {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const [user, setUser] = useState<User>();
@@ -54,6 +57,7 @@ const DetailSubjectPage = (): JSX.Element => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isExtendedScores, setIsExtendedScores] = useState<boolean>(false);
   const [isExtendedKeywords, setIsExtendedKeywords] = useState<boolean>(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   const setup = useCallback(async () => {
     try {
@@ -138,6 +142,9 @@ const DetailSubjectPage = (): JSX.Element => {
       const axiosError = err as AxiosError;
       if (axiosError.response) {
         alert((axiosError.response.data as MessageResponse).message);
+        if ((axiosError.response.data as MessageResponse).code === 401) {
+          navigate("/login");
+        }
       }
     }
   };
@@ -151,6 +158,9 @@ const DetailSubjectPage = (): JSX.Element => {
       const axiosError = err as AxiosError;
       if (axiosError.response) {
         alert((axiosError.response.data as MessageResponse).message);
+        if ((axiosError.response.data as MessageResponse).code === 401) {
+          navigate("/login");
+        }
       }
     }
   };
@@ -164,6 +174,9 @@ const DetailSubjectPage = (): JSX.Element => {
       const axiosError = err as AxiosError;
       if (axiosError.response) {
         alert((axiosError.response.data as MessageResponse).message);
+        if ((axiosError.response.data as MessageResponse).code === 401) {
+          navigate("/login");
+        }
       }
     }
   };
@@ -177,6 +190,9 @@ const DetailSubjectPage = (): JSX.Element => {
       const axiosError = err as AxiosError;
       if (axiosError.response) {
         alert((axiosError.response.data as MessageResponse).message);
+        if ((axiosError.response.data as MessageResponse).code === 401) {
+          navigate("/login");
+        }
       }
     }
   };
@@ -196,6 +212,15 @@ const DetailSubjectPage = (): JSX.Element => {
       }
     }
   };
+  const onReportReduplication = () => {
+    setIsOpenModal(false);
+  };
+  const onReportModification = () => {
+    setIsOpenModal(false);
+  };
+  const onReportDeletion = () => {
+    setIsOpenModal(false);
+  };
 
   useEffect(() => {
     setup();
@@ -207,9 +232,30 @@ const DetailSubjectPage = (): JSX.Element => {
 
   return (
     <Style.RootContainer>
+      <Modal
+        open={isOpenModal}
+        onClose={() => {
+          setIsOpenModal(false);
+        }}
+      >
+        <ReportModal
+          onReportReduplication={onReportReduplication}
+          onReportModification={onReportModification}
+          onReportDeletion={onReportDeletion}
+        />
+      </Modal>
       <Header isLoggedIn={user ? true : false} type="common" />
       <Style.BodyContainer>
         <Style.SubjectContainer>
+          <Style.SubjectToolContainer>
+            <IconButton
+              onClick={() => {
+                setIsOpenModal(true);
+              }}
+            >
+              <FlagIcon />
+            </IconButton>
+          </Style.SubjectToolContainer>
           <Style.SubjectWrapper>
             <SubjectCard cursor="auto" subject={subject.subject} />
           </Style.SubjectWrapper>
@@ -217,7 +263,7 @@ const DetailSubjectPage = (): JSX.Element => {
           <Style.Divider />
 
           <Style.SubjectInfoContainer>
-            <Style.SubjectToolContainer>
+            <Style.SubjectInfoToolContainer>
               <Style.Subtitle>전체 평균</Style.Subtitle>
               <IconButton
                 onClick={() => {
@@ -226,7 +272,7 @@ const DetailSubjectPage = (): JSX.Element => {
               >
                 {isExtendedScores ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </IconButton>
-            </Style.SubjectToolContainer>
+            </Style.SubjectInfoToolContainer>
             <Style.CommonRatingScoreCardWrapper>
               {reviews.length ? (
                 <RatingScoreCard
@@ -244,7 +290,7 @@ const DetailSubjectPage = (): JSX.Element => {
           </Style.SubjectInfoContainer>
 
           <Style.SubjectInfoContainer>
-            <Style.SubjectToolContainer>
+            <Style.SubjectInfoToolContainer>
               <Style.Subtitle>키워드</Style.Subtitle>
               <IconButton
                 onClick={() => {
@@ -253,7 +299,7 @@ const DetailSubjectPage = (): JSX.Element => {
               >
                 {isExtendedKeywords ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </IconButton>
-            </Style.SubjectToolContainer>
+            </Style.SubjectInfoToolContainer>
             <Style.KeywordContainer>
               {subject.keywords.map((keyword, id) => {
                 if (!isExtendedKeywords && id > 5) {
@@ -268,6 +314,7 @@ const DetailSubjectPage = (): JSX.Element => {
             </Style.KeywordContainer>
           </Style.SubjectInfoContainer>
         </Style.SubjectContainer>
+
         <Style.ContentContainer>
           <Style.ToolContainer>
             <Style.ButtonConatiner>
@@ -314,6 +361,7 @@ const DetailSubjectPage = (): JSX.Element => {
                 onClick={() => {
                   if (!getToken()) {
                     alert("로그인이 필요한 서비스입니다.");
+                    navigate("/login");
                     return;
                   }
                   setIsEdit(true);

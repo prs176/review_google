@@ -1,19 +1,17 @@
-import { Category, CategoryToNumber } from "../../model/subject";
+import { CategoryToNumber } from "../../model/subject";
 import * as Style from "./styled/EditSubjectCard";
-import { CategoryBar, Image } from "./styled/SubjectCard";
+import { Image } from "./styled/SubjectCard";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { useState } from "react";
 import { ErrorText } from "../../styled/Common";
+import EditSubjectInfoCard from "./EditSubjectInfoCard";
+import ImageInput from "./ImageInput";
 
 interface Props {
   onAdd: (file: File, category: CategoryToNumber, title: string, from: string) => void;
 }
 
 const EditSubjectCard = ({ onAdd }: Props): JSX.Element => {
-  const categories = Object.keys(CategoryToNumber)
-    .map((category) => Number(category))
-    .filter((cateogory) => !isNaN(cateogory));
-
   const [image, setImage] = useState<string>("");
   const [file, setFile] = useState<File>();
   const [category, setCategory] = useState<CategoryToNumber>(CategoryToNumber.FOOD);
@@ -39,39 +37,14 @@ const EditSubjectCard = ({ onAdd }: Props): JSX.Element => {
 
   return (
     <Style.RootContainer>
-      <label htmlFor="file">
-        <Style.ImageInputLabel>
-          {image ? (
-            <Image src={image} />
-          ) : (
-            <Style.ImageInputIconWrapper>
-              <CameraAltIcon />
-            </Style.ImageInputIconWrapper>
-          )}
-        </Style.ImageInputLabel>
-      </label>
-      <Style.ImageInput
-        id="file"
-        type="file"
-        accept="image/jpg, image/png, image/jpeg, image/webp"
-        onChange={onChangeFile}
-      />
-      <Style.CategoryContainer>
-        <CategoryBar category={category} />
-        <Style.CategorySelect onChange={onChangeCategory} value={category}>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {Category[CategoryToNumber[category] as keyof typeof Category]}
-            </option>
-          ))}
-        </Style.CategorySelect>
-      </Style.CategoryContainer>
-      <Style.TitleInput type="text" placeholder="제목" onChange={onChangeTitle} value={title} />
-      <Style.FromInput
-        type="text"
-        placeholder="제작/배급/소유"
-        onChange={onChangeFrom}
-        value={from}
+      <ImageInput image={image} onChangeFile={onChangeFile} />
+      <EditSubjectInfoCard
+        category={category}
+        onChangeCategory={onChangeCategory}
+        title={title}
+        onChangeTitle={onChangeTitle}
+        from={from}
+        onChangeFrom={onChangeFrom}
       />
       <Style.ToolWrapper>
         <ErrorText display={errorMessage ? "visible" : "hidden"}>{errorMessage}</ErrorText>

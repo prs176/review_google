@@ -170,7 +170,7 @@ const EditReviewCard = ({ review, onDone }: Props): JSX.Element => {
                 }
                 onDone(review.id, title, content, raiting, scores);
               } else {
-                setErrorMessage("값이 비어있습니다");
+                setErrorMessage("값이 비어있습니다.");
               }
             }}
           >

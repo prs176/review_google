@@ -25,6 +25,14 @@ export const SubjectWrapper = styled.div`
   justify-content: center;
 `;
 
+export const SubjectToolContainer = styled.div`
+  display: flex;
+  justify-content: right;
+  margin-top: 10px;
+  margin-right: -30px;
+  margin-bottom: -20px;
+`;
+
 export const SubjectInfoContainer = styled.div`
   margin-top: 30px;
   display: flex;
@@ -50,7 +58,7 @@ export const ReviewContainer = styled.div`
   background: #efeff4;
 `;
 
-export const SubjectToolContainer = styled.div`
+export const SubjectInfoToolContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;

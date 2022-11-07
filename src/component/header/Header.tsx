@@ -38,11 +38,7 @@ const Header = ({ isLoggedIn, type, value }: Props): JSX.Element => {
             <Style.LogoutButton
               onClick={() => {
                 removeCookie("token");
-                if (window.history.state) {
-                  navigate(-1);
-                } else {
-                  navigate("/", { replace: true });
-                }
+                navigate("/", { replace: true });
               }}
             >
               로그아웃
@@ -51,7 +47,9 @@ const Header = ({ isLoggedIn, type, value }: Props): JSX.Element => {
           {isLoggedIn ? (
             <Style.LoggedInProfile
               onClick={() => {
-                navigate("/my");
+                if (window.location.href !== "http://localhost:3000/my") {
+                  navigate("/my");
+                }
               }}
             />
           ) : (
