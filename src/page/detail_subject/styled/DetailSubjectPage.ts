@@ -39,10 +39,6 @@ export const SubjectInfoContainer = styled.div`
   flex-direction: column;
 `;
 
-export const CommonRatingScoreCardWrapper = styled.div`
-  margin-left: -8px;
-`;
-
 export const ContentContainer = styled.div`
   width: 100%;
   display: block;

@@ -273,20 +273,19 @@ const DetailSubjectPage = (): JSX.Element => {
                 {isExtendedScores ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </IconButton>
             </Style.SubjectInfoToolContainer>
-            <Style.CommonRatingScoreCardWrapper>
-              {reviews.length ? (
-                <RatingScoreCard
-                  rating={subject.raiting}
-                  scores={
-                    isExtendedScores && subject.scores.length > 3
-                      ? subject.scores
-                      : subject.scores.slice(0, 3)
-                  }
-                ></RatingScoreCard>
-              ) : (
-                <></>
-              )}
-            </Style.CommonRatingScoreCardWrapper>
+
+            {reviews.length ? (
+              <RatingScoreCard
+                rating={subject.raiting}
+                scores={
+                  isExtendedScores && subject.scores.length > 3
+                    ? subject.scores
+                    : subject.scores.slice(0, 3)
+                }
+              ></RatingScoreCard>
+            ) : (
+              <></>
+            )}
           </Style.SubjectInfoContainer>
 
           <Style.SubjectInfoContainer>
