@@ -27,8 +27,12 @@ const RegisterPage = (): JSX.Element => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const onRegister = async () => {
-    if (!(email && password && name && birth.length === 10)) {
+    if (!(email && password && name && birth.length)) {
       setErrorMessage("값이 비어 있습니다.");
+      return;
+    }
+    if (birth.length > 10) {
+      setErrorMessage("생년월일은 년 4자, 월 2자, 일2자 이내로 입력해주세요");
       return;
     }
     try {

@@ -16,7 +16,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate, useParams } from "react-router-dom";
 import { getToken } from "../../api/token/token";
 import { getMyUser } from "../../api/api/user";
-import { getDetailSubject } from "../../api/api/subject";
+import { getDetailSubject, postImage } from "../../api/api/subject";
 import {
   deleteReview,
   getReviews,
@@ -32,6 +32,11 @@ import { MessageResponse } from "../../api/response/response";
 import { Score } from "../../model/score";
 import { postExtractKeyword } from "../../api/api/keyword";
 import ReportModal from "../../component/modal/ReportModal";
+import {
+  postDeletionReport,
+  postModificationReport,
+  postReduplicationReport,
+} from "../../api/api/report";
 
 const DetailSubjectPage = (): JSX.Element => {
   const navigate = useNavigate();
@@ -212,14 +217,47 @@ const DetailSubjectPage = (): JSX.Element => {
       }
     }
   };
-  const onReportReduplication = () => {
-    setIsOpenModal(false);
+  const onReportReduplication = async (url: string) => {
+    try {
+      await postReduplicationReport(subject.subject.id, { url });
+
+      setIsOpenModal(false);
+    } catch (err) {
+      const axiosError = err as AxiosError;
+      if (axiosError.response) {
+        alert((axiosError.response.data as MessageResponse).message);
+      }
+    }
   };
-  const onReportModification = () => {
-    setIsOpenModal(false);
+  const onReportModification = async (
+    file: File,
+    category: CategoryToNumber,
+    title: string,
+    from: string
+  ) => {
+    try {
+      const image = await postImage(file);
+      await postModificationReport(subject.subject.id, { image, category, title, from });
+
+      setIsOpenModal(false);
+    } catch (err) {
+      const axiosError = err as AxiosError;
+      if (axiosError.response) {
+        alert((axiosError.response.data as MessageResponse).message);
+      }
+    }
   };
-  const onReportDeletion = () => {
-    setIsOpenModal(false);
+  const onReportDeletion = async (reason: string) => {
+    try {
+      await postDeletionReport(subject.subject.id, { reason });
+
+      setIsOpenModal(false);
+    } catch (err) {
+      const axiosError = err as AxiosError;
+      if (axiosError.response) {
+        alert((axiosError.response.data as MessageResponse).message);
+      }
+    }
   };
 
   useEffect(() => {
