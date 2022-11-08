@@ -1,7 +1,5 @@
 import { CategoryToNumber } from "../../model/subject";
 import * as Style from "./styled/EditSubjectCard";
-import { Image } from "./styled/SubjectCard";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { useState } from "react";
 import { ErrorText } from "../../styled/Common";
 import EditSubjectInfoCard from "./EditSubjectInfoCard";
@@ -51,7 +49,7 @@ const EditSubjectCard = ({ onAdd }: Props): JSX.Element => {
         <Style.DoneButton
           onClick={() => {
             if (file && category && title && from) {
-              onAdd(file!, category, title, from);
+              onAdd(file, category, title, from);
             } else {
               setErrorMessage("값이 비어있습니다.");
             }

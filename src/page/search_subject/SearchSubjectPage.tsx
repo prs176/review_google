@@ -41,7 +41,6 @@ const SearchSubjectPage = (): JSX.Element => {
       const subjects = await getSubjects(keyword || "");
       setSubjects(subjects);
 
-      keyword = title;
       const url = encodeURIComponent(title);
       navigate(`/search_subject/${url}`);
     } catch (err) {
@@ -85,10 +84,11 @@ const SearchSubjectPage = (): JSX.Element => {
             }}
           />
         )}
-        {subjects.map((subject) => (
-          <SubjectCard cursor="pointer" key={subject.id} subject={subject} />
-        ))}
-        {!subjects.length && !isEdit && (
+        {subjects &&
+          subjects.map((subject) => (
+            <SubjectCard cursor="pointer" key={subject.id} subject={subject} />
+          ))}
+        {subjects && !subjects.length && !isEdit && (
           <Style.PlaceHolder>
             검색 결과가 없습니다.
             <br />+ 버튼을 통해 새로운 페이지를 만들 수 있습니다.
