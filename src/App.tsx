@@ -16,7 +16,6 @@ const App = (): JSX.Element => {
         <Route path="/my" element={<MyPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/search_subject/" element={<SearchSubjectPage />}></Route>
         <Route path="/search_subject/">
           <Route path=":keyword" element={<SearchSubjectPage />} />
           <Route path="" element={<SearchSubjectPage />} />
