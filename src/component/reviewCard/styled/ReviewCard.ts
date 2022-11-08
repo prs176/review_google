@@ -88,11 +88,16 @@ export const Id = styled.p`
   font-size: 0.9em;
 `;
 
+export const ExtnededContent = styled.p`
+  overflow-wrap: break-word;
+`;
+
 export const Content = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
+  overflow-wrap: break-word;
   overflow: hidden;
 `;
 

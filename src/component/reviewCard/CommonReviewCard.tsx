@@ -39,7 +39,11 @@ const CommonReviewCard = ({
             <Style.Title>{review.title}</Style.Title>
             <Style.Id>{review.user.email}</Style.Id>
           </Style.UserInfoContainer>
-          {isExtended ? <p>{review.content}</p> : <Style.Content>{review.content}</Style.Content>}
+          {isExtended ? (
+            <Style.ExtnededContent>{review.content}</Style.ExtnededContent>
+          ) : (
+            <Style.Content>{review.content}</Style.Content>
+          )}
           <Style.ExtendButtonWrapper>
             {isExtended ? (
               <Style.ExtendButton onClick={() => setIsExtended(false)}>접기</Style.ExtendButton>
